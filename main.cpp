@@ -12,9 +12,9 @@ string MakeReceipt(const string *products, const int *prices, const int *quantit
 
 int main()
 {
-    string products[5] = {"Susu", "Roti", "Telur", "Keju", "Margarin"};
+    string products[5] = {"Chitato", "Doritos", "Mountain Dew", "Dr. Pepper", "Sourpatch"};
     string coupon[2] = {"SMARICCI2HEBAT", "SMARICCI2"};
-    int prices[5] = {5, 5, 3, 6, 3};
+    int prices[5] = {1, 2, 2, 3, 5};
     int quantity[5] = {0, 0, 0, 0, 0};
     int total = 0;
     int choice = 0;
@@ -36,40 +36,41 @@ int main()
             system("cls");
 
             cout << "=============================" << endl;
-            cout << "Here is the product list: " << endl;
+            cout << "Here is the product list : " << endl;
             cout << "=============================" << endl;
             for (int i = 0; i < 5; i++)
             {
                 cout << i + 1 << ". " << products[i] << " - $" << prices[i] << endl;
             }
+            cout << "Enter '0' to proceed to checkout" << endl;
             cout << "=============================" << endl;
             int ProductChoice = -1;
 
             while (ProductChoice != 0)
             {
-                cout << "Please select a product: ";
+                cout << "Please select a product : ";
                 cin >> ProductChoice;
 
                 if (ProductChoice == 0)
                 {
                     cout << "=============================" << endl;
-                    cout << "Here is your receipt: " << endl;
+                    cout << "Here is your receipt : " << endl;
                     cout << MakeReceipt(products, prices, quantity, 5, false) << endl;
                     cout << "=============================" << endl;
-                    cout << "Please enter your coupon code: ";
+                    cout << "Please enter your coupon code : ";
                     string code;
                     cin >> code;
                     cout << "=============================" << endl;
                     string IsValid = CheckCoupon(code, coupon);
                     if (IsValid == "Valid")
                     {
-                        cout << "Here is your receipt with discount: " << endl;
+                        cout << "Here is your receipt with discount : " << endl;
                         cout << MakeReceipt(products, prices, quantity, 5, true) << endl;
                     }
                     else
                     {
                         cout << "Your coupon is " << IsValid << endl;
-                        cout << "Here is your receipt without discount: " << endl;
+                        cout << "Here is your receipt without discount : " << endl;
                         cout << MakeReceipt(products, prices, quantity, 5, false) << endl;
                     }
                     return 0;
@@ -81,7 +82,7 @@ int main()
                 }
                 else
                 {
-                    cout << "How many " << products[ProductChoice - 1] << " would you like to buy: ";
+                    cout << "How many " << products[ProductChoice - 1] << " would you like to buy : ";
                     cin >> quantity[ProductChoice - 1];
                     cout << "=============================" << endl;
                     cout << "You have added " << quantity[ProductChoice - 1] << " " << products[ProductChoice - 1] << " to your cart" << endl;
