@@ -57,10 +57,11 @@ int main()
                     cout << "Here is your receipt : " << endl;
                     cout << MakeReceipt(products, prices, quantity, 5, false) << endl;
                     cout << "=============================" << endl;
-                    cout << "Please enter your coupon code : ";
+                    cout << "Please enter your coupon code (use 'none' to exit): ";
                     string code;
                     cin >> code;
                     cout << "=============================" << endl;
+
                     string IsValid = CheckCoupon(code, coupon);
                     if (IsValid == "Valid")
                     {
@@ -69,10 +70,16 @@ int main()
                     }
                     else
                     {
-                        cout << "Your coupon is " << IsValid << endl;
-                        cout << "Here is your receipt without discount : " << endl;
-                        cout << MakeReceipt(products, prices, quantity, 5, false) << endl;
+                        if (code == "none"){
+                            cout << "Here is your receipt without discount : " << endl;
+                            cout << MakeReceipt(products, prices, quantity, 5, false) << endl;
+                        } else {
+                            cout << "Your coupon is " << IsValid << endl;
+                            cout << "Here is your receipt without discount : " << endl;
+                            cout << MakeReceipt(products, prices, quantity, 5, false) << endl;
+                        }
                     }
+                    
                     cout << "=============================" << endl;
                     cout << "Input your payment : ";
                     int payment;
