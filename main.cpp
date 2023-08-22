@@ -12,9 +12,9 @@ string MakeReceipt(const string *products, const int *prices, const int *quantit
 
 int main()
 {
-    string products[5] = {"Chitato", "Doritos", "Mountain Dew", "Dr. Pepper", "Sourpatch"};
+    string products[5] = {"Chitato", "Doritos", "Coca Cola", "Pepsi", "Cheetos"};
     string coupon[2] = {"SMARICCI2HEBAT", "SMARICCI2"};
-    int prices[5] = {1, 2, 2, 3, 5};
+    int prices[5] = {15000, 30000, 30000, 45000, 75000};
     int quantity[5] = {0, 0, 0, 0, 0};
     int total = 0;
     int choice = 0;
@@ -40,7 +40,7 @@ int main()
             cout << "=============================" << endl;
             for (int i = 0; i < 5; i++)
             {
-                cout << i + 1 << ". " << products[i] << " - $" << prices[i] << endl;
+                cout << i + 1 << ". " << products[i] << " - Rp" << prices[i] << endl;
             }
             cout << "Enter '0' to proceed to checkout" << endl;
             cout << "=============================" << endl;
@@ -73,7 +73,31 @@ int main()
                         cout << "Here is your receipt without discount : " << endl;
                         cout << MakeReceipt(products, prices, quantity, 5, false) << endl;
                     }
-                    return 0;
+                    cout << "=============================" << endl;
+                    cout << "Input your payment : ";
+                    int payment;
+                    cin >> payment;
+                    cout << "=============================" << endl;
+
+                    string ReceiptVar = MakeReceipt(products, prices, quantity, 5, false);
+                    string Total = ExtractFromReciept(ReceiptVar);
+                    int IntTotal = stoi(Total);
+
+                    if (payment < IntTotal)
+                    {
+                        cout << "Your payment is not enough" << endl;
+                        cout << "=============================" << endl;
+                        return 0;
+                    }
+                    else
+                    {
+                        cout << "Your change is Rp" << payment - IntTotal << endl;
+                        cout << "=============================" << endl;
+                        cout << "Thank you for shopping at RicciMart" << endl;
+                        cout << "=============================" << endl;
+                        Sleep(2000);
+                        return 0;
+                    }
                 }
                 else if (ProductChoice > 5)
                 {
@@ -128,7 +152,7 @@ string MakeReceipt(const string *products, const int *prices, const int *quantit
     {
         if (quantity[i] > 0)
         {
-            receipt += products[i] + " - " + to_string(quantity[i]) + " - $" + to_string(prices[i] * quantity[i]) + "\n";
+            receipt += products[i] + " - " + to_string(quantity[i]) + " - Rp" + to_string(prices[i] * quantity[i]) + "\n";
             if (discount)
             {
                 receipt += "Discount - 10%\n";
@@ -140,7 +164,7 @@ string MakeReceipt(const string *products, const int *prices, const int *quantit
             }
         }
     }
-    receipt += "Total - $" + to_string(total) + "\n";
+    receipt += "Total - Rp" + to_string(total) + "\n";
     return receipt;
 }
 
@@ -154,17 +178,16 @@ string ExtractFromReciept(const string &ReceiptVar)
         {
             for (int j = i + 8; j < length; j++)
             {
-                if (ReceiptVar[j] == '\n')
-                {
-                    break;
-                }
-                else
+                if (isdigit(ReceiptVar[j]))
                 {
                     Total += ReceiptVar[j];
+                }
+                else if (ReceiptVar[j] == '\n')
+                {
+                    break;
                 }
             }
         }
     }
-    Total.erase(0, 1);
     return Total;
 }
