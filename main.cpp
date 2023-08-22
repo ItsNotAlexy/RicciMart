@@ -18,6 +18,7 @@ int main()
     int quantity[5] = {0, 0, 0, 0, 0};
     int total = 0;
     int choice = 0;
+    int maxQuantity = 2;
 
     cout << "=============================" << endl;
     cout << "RicciMart Cashier System" << endl;
@@ -113,11 +114,22 @@ int main()
                 }
                 else
                 {
-                    cout << "How many " << products[ProductChoice - 1] << " would you like to buy : ";
-                    cin >> quantity[ProductChoice - 1];
+                    int ItemQuantity = 0;
+                    cout << "Enter quantity : ";
+                    cin >> ItemQuantity;
                     cout << "=============================" << endl;
-                    cout << "You have added " << quantity[ProductChoice - 1] << " " << products[ProductChoice - 1] << " to your cart" << endl;
-                    cout << "=============================" << endl;
+
+                    if(quantity[ProductChoice - 1] + ItemQuantity > maxQuantity)
+                    {
+                        cout << "You can only buy " << maxQuantity << " " << products[ProductChoice - 1] << endl;
+                        cout << "=============================" << endl;
+                    }
+                    else
+                    {
+                        quantity[ProductChoice - 1] += ItemQuantity;
+                        cout << "You have added " << ItemQuantity << " " << products[ProductChoice - 1] << endl;
+                        cout << "=============================" << endl;
+                    }
                 }
             }
         }
