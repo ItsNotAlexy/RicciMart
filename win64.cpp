@@ -12,9 +12,9 @@ string MakeReceipt(const string *products, const int *prices, const int *quantit
 
 int main()
 {
-    string products[5] = {"Chitato", "Doritos", "Coca Cola", "Pepsi", "Cheetos"};
+    string products[5] = {"Chitato", "HappyTos", "Coca Cola", "Pepsi", "Cheetos"};
     string coupon[2] = {"SMARICCI2HEBAT", "SMARICCI2"};
-    int prices[5] = {15000, 30000, 30000, 45000, 75000};
+    int prices[5] = {10000, 10000, 6000, 6000, 7000};
     int quantity[5] = {0, 0, 0, 0, 0};
     int total = 0;
     int choice = 0;
@@ -62,12 +62,14 @@ int main()
                     string code;
                     cin >> code;
                     cout << "=============================" << endl;
+                    bool isCoupon = false;
 
                     string IsValid = CheckCoupon(code, coupon);
                     if (IsValid == "Valid")
                     {
                         cout << "Here is your receipt with discount : " << endl;
                         cout << MakeReceipt(products, prices, quantity, 5, true) << endl;
+                        isCoupon = true;
                     }
                     else
                     {
@@ -87,9 +89,20 @@ int main()
                     cin >> payment;
                     cout << "=============================" << endl;
 
-                    string ReceiptVar = MakeReceipt(products, prices, quantity, 5, false);
-                    string Total = ExtractFromReciept(ReceiptVar);
-                    int IntTotal = stoi(Total);
+                    string ReceiptVar;
+                    string Total;
+                    int IntTotal;
+
+                    if(isCoupon == true){
+                        ReceiptVar = MakeReceipt(products, prices, quantity, 5, true);
+                        Total = ExtractFromReciept(ReceiptVar);
+                        IntTotal = stoi(Total);
+                    } else {
+                        ReceiptVar = MakeReceipt(products, prices, quantity, 5, false);
+                        Total = ExtractFromReciept(ReceiptVar);
+                        IntTotal = stoi(Total);
+                    }
+                    
 
                     if (payment < IntTotal)
                     {
@@ -99,12 +112,24 @@ int main()
                     }
                     else
                     {
-                        cout << "Your change is Rp" << payment - IntTotal << endl;
-                        cout << "=============================" << endl;
-                        cout << "Thank you for shopping at RicciMart" << endl;
-                        cout << "=============================" << endl;
-                        Sleep(2000);
-                        return 0;
+                        int change = 0;
+                        if(IntTotal > payment){
+                            change = IntTotal - payment;
+                            cout << "Your change is Rp" << change << endl;
+                            cout << "=============================" << endl;
+                            cout << "Thank you for shopping at RicciMart" << endl;
+                            cout << "=============================" << endl;
+                            Sleep(2000);
+                            return 0;
+                        } else {
+                            change = payment - IntTotal;
+                            cout << "Your change is Rp" << change << endl;
+                            cout << "=============================" << endl;
+                            cout << "Thank you for shopping at RicciMart" << endl;
+                            cout << "=============================" << endl;
+                            Sleep(2000);
+                            return 0;
+                        }
                     }
                 }
                 else if (ProductChoice > 5)
