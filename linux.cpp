@@ -11,7 +11,7 @@ string MakeReceipt(const string *products, const int *prices, const int *quantit
 
 int main()
 {
-    string products[5] = {"Chitato", "HappyTos", "Coca Cola", "Pepsi", "Cheetos"};
+    string products[5] = {"Chitato", "HappyTos", "Coca Cola", "Sprite", "CemCem"};
     string coupon[2] = {"SMARICCI2HEBAT", "SMARICCI2"};
     int prices[5] = {10000, 10000, 6000, 6000, 7000};
     int quantity[5] = {0, 0, 0, 0, 0};
@@ -118,7 +118,6 @@ int main()
                             cout << "=============================" << endl;
                             cout << "Thank you for shopping at RicciMart" << endl;
                             cout << "=============================" << endl;
-                            2000);
                             return 0;
                         } else {
                             change = payment - IntTotal;
