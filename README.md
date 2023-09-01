@@ -9,4 +9,5 @@ To make a simulation of a cashier system with C++ and showing new potential stud
 # Installation
 
 - Use `win64.cpp` for Windows 64 Bit, and `linux.cpp` for Linux based OS.
+- Make sure that you delete `win64.cpp` if your in a linux system, and delete `linux.cpp` for windows systems.
 - Compile and run the system.
